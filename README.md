@@ -13,9 +13,12 @@ $ go get github.com/takashabe/go-notice-io
 
 # Usage
 
-```
+```go
+package main
+
 import (
   "io"
+
   "github.com/takashabe/go-notice-io"
 )
 
@@ -24,12 +27,12 @@ func main() {
   buf := noticeio.NewBufferWithChannel(nil, make(chan error, 1))
 
   go func(w io.Writer) {
-      for {
-          w.Write([]byte("example"))
-      }
+    for {
+      w.Write([]byte("example"))
+    }
   }(buf)
 
-  // block channel
+  // receive channel each time Write()
   <-buf.WriteCh
 }
 ```
