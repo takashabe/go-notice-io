@@ -1,6 +1,10 @@
 package main
 
-import "io"
+import (
+	"io"
+
+	"github.com/takashabe/go-notice-io"
+)
 
 func main() {
 	// notify only write
@@ -12,6 +16,6 @@ func main() {
 		}
 	}(buf)
 
-	// block channel
+	// receive channel each time Write()
 	<-buf.WriteCh
 }
